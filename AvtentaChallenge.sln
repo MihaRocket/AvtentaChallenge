@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvtentaChallenge", "AvtentaChallenge\AvtentaChallenge.csproj", "{C3F65D36-695C-4D50-9E60-AA056434968E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3F65D36-695C-4D50-9E60-AA056434968E}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{C3F65D36-695C-4D50-9E60-AA056434968E}.Debug|anycpu.Build.0 = Debug|anycpu
+		{C3F65D36-695C-4D50-9E60-AA056434968E}.Release|anycpu.ActiveCfg = Release|anycpu
+		{C3F65D36-695C-4D50-9E60-AA056434968E}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD2EEA0D-E050-49A8-9D34-A7CF2CA3F29C}
+	EndGlobalSection
+EndGlobal
