@@ -6,7 +6,7 @@ namespace AvtentaChallenge
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var a = "Test";
         }
     }
 }
