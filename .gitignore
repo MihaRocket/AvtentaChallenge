@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/AvtentaChallenge/v17/.suo
+/.vs/slnx.sqlite
+/AvtentaChallenge/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/AvtentaChallenge/obj/Debug/AvtentaChallenge.csproj.AssemblyReference.cache
+/AvtentaChallenge/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+/AvtentaChallenge/obj/Release/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+/AvtentaChallenge/bin/Debug
+/AvtentaChallenge/obj
+/AvtentaChallenge/AvtentaChallenge.csproj.user
