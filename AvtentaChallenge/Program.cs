@@ -20,7 +20,7 @@ namespace AvtentaChallenge
         public static void Main(string[] args)
         {
             // Initialize xml serializer variable with object type Akcija
-            var serializer = new XmlSerializer(typeof(List<Akcija>));
+            var serializerXML = new XmlSerializer(typeof(List<Akcija>));
 
             Console.WriteLine($"Input source URL (default URL: {SourceURL}), leave blank if you want to use default URL:");
             var clintSourceURL = Console.ReadLine();
@@ -31,8 +31,8 @@ namespace AvtentaChallenge
             */
             Console.Clear();
             Console.WriteLine("Getting data from source....");
-            TextReader reader = new StringReader(GetDataFromSource(clintSourceURL));
-            List<Akcija> result = (List<Akcija>)serializer.Deserialize(reader);
+            TextReader readerWithData = new StringReader(GetDataFromSource(clintSourceURL));
+            List<Akcija> resultList = (List<Akcija>)serializerXML.Deserialize(readerWithData);
             Console.WriteLine("Data from source read successfully");
 
             Console.Clear();            
@@ -43,7 +43,7 @@ namespace AvtentaChallenge
             //Submit List of data to destination  
             Console.Clear();
             Console.WriteLine("Submitting data to destination...");
-            SumbitDataToDestination(clintDestinationURL, result);
+            SumbitDataToDestination(clintDestinationURL, resultList);
             Console.WriteLine("Data successfully submitted");
 
             Console.ReadLine();
