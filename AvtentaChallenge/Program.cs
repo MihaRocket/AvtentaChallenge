@@ -21,11 +21,13 @@ namespace AvtentaChallenge
             client.Open();
             var response = client.GetActions();
             client.Close();
-            var serializer = new XmlSerializer(typeof(List<Akcija>)); 
-            using (TextReader reader = new StringReader(response))
-            {
-                List<Akcija> result = (List<Akcija>)serializer.Deserialize(reader);
-            }
+            var serializer = new XmlSerializer(typeof(List<Akcija>));
+            TextReader reader = new StringReader(response);
+            List<Akcija> result = (List<Akcija>)serializer.Deserialize(reader);
+            DestinationWsClient destination = new DestinationWsClient("BasicHttpBinding_IDestinationWs", TargetURL);
+            destination.Open();
+            destination.SubmitActions(result.ToArray(), "nabergoj.miha@gmail.com");
+            destination.Close();
         }
     }
 }
