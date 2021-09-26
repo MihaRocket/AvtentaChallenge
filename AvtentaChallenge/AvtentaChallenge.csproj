@@ -45,7 +45,6 @@
     <None Include="app.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="output.config" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Xml.XmlSerializer">
