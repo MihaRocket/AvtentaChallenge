@@ -19,12 +19,16 @@ namespace AvtentaChallenge
         public static string DestinationURL = "http://195.88.82.191/DemoWS/Services/DestinationWs.svc";
         public static void Main(string[] args)
         {
-            // Initialize xml serializer with object type Akcija
+            // Initialize xml serializer variable with object type Akcija
             var serializer = new XmlSerializer(typeof(List<Akcija>));
 
             Console.WriteLine($"Input source URL (default URL: {SourceURL}), leave blank if you want to use default URL:");
             var clintSourceURL = Console.ReadLine();
 
+            /*
+             Initialize TextReader variable with data from source.
+             Initialize List with object Akcija and populates data from deserializing TextReader 
+            */
             Console.Clear();
             Console.WriteLine("Getting data from source....");
             TextReader reader = new StringReader(GetDataFromSource(clintSourceURL));
@@ -35,6 +39,8 @@ namespace AvtentaChallenge
             Console.WriteLine($"Input destination URL (default URL: {DestinationURL}), leave blank if you want to use default URL:");
             var clintDestinationURL = Console.ReadLine();
 
+
+            //Submit List of data to destination  
             Console.Clear();
             Console.WriteLine("Submitting data to destination...");
             SumbitDataToDestination(clintDestinationURL, result);
