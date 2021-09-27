@@ -1,6 +1,7 @@
 ﻿using DemoWS.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Xml.Serialization;
@@ -9,17 +10,14 @@ namespace AvtentaChallenge
 {
     class MainClass
     {
-        // Source URL for calling client
-        public static string SourceURL = "http://195.88.82.191/DemoWS/Services/SourceWs.svc";
-        // Destination URL for submiting results
-        public static string DestinationURL = "http://195.88.82.191/DemoWS/Services/DestinationWs.svc";
+        // Source URL for calling client read from app.config
+        public static string SourceURL = ConfigurationManager.AppSettings["SourceURL"];
+        // Destination URL for submiting results read from app.config
+        public static string DestinationURL = ConfigurationManager.AppSettings["DestinationURL"];
         public static void Main(string[] args)
         {
             // Initializes xml serializer variable with object type Akcija
             var serializerXML = new XmlSerializer(typeof(List<Akcija>));
-
-            Console.WriteLine($"Input source URL (default URL: {SourceURL}), leave blank if you want to use default URL:");
-            var clintSourceURL = Console.ReadLine();
 
             /*
              Initializes TextReader variable with data from source.
@@ -27,24 +25,19 @@ namespace AvtentaChallenge
             */
             Console.Clear();
             Console.WriteLine("Getting data from source....");
-            TextReader readerWithData = new StringReader(GetDataFromSource(clintSourceURL));
+            TextReader readerWithData = new StringReader(GetDataFromSource());
             List<Akcija> resultList = (List<Akcija>)serializerXML.Deserialize(readerWithData);
             Console.WriteLine("Data from source read successfully");
-
-            Console.Clear();            
-            Console.WriteLine($"Input destination URL (default URL: {DestinationURL}), leave blank if you want to use default URL:");
-            var clintDestinationURL = Console.ReadLine();
-
 
             //Submits List of data to destination  
             Console.Clear();
             Console.WriteLine("Submitting data to destination...");
-            SumbitDataToDestination(clintDestinationURL, "nabergoj.miha@gmail.com", resultList);
+            SubmitDataToDestination("nabergoj.miha@gmail.com", resultList);
             Console.WriteLine("Data successfully submitted");
 
             Console.ReadLine();
         }
-        private static string GetDataFromSource(string clintSourceURL)
+        private static string GetDataFromSource()
         {
             try
             {
@@ -54,7 +47,7 @@ namespace AvtentaChallenge
                  Closes clent and returns a response string
                 */
 
-                SourceWsClient client = new SourceWsClient("BasicHttpBinding_ISourceWs", string.IsNullOrEmpty(clintSourceURL) ? SourceURL : clintSourceURL);
+                SourceWsClient client = new SourceWsClient("BasicHttpBinding_ISourceWs", SourceURL);
                 client.Open();
                 var response = client.GetActions();
                 client.Close();
@@ -66,7 +59,7 @@ namespace AvtentaChallenge
                 return null;
             }
         }
-        private static void SumbitDataToDestination(string clintDestinationURL, string Email, List<Akcija> data)
+        private static void SubmitDataToDestination(string Email, List<Akcija> data)
         {
             try
             {
@@ -75,7 +68,7 @@ namespace AvtentaChallenge
                  Opens destination and submits transformed List to Array of data to destination
                 */
 
-                DestinationWsClient destination = new DestinationWsClient("BasicHttpBinding_IDestinationWs", string.IsNullOrEmpty(clintDestinationURL) ? DestinationURL : clintDestinationURL);
+                DestinationWsClient destination = new DestinationWsClient("BasicHttpBinding_IDestinationWs", DestinationURL);
                 destination.Open();
                 var response = destination.SubmitActions(data.ToArray(), Email);
                 if (response != "ok")
