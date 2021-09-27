@@ -37,16 +37,17 @@ namespace AvtentaChallenge
 
             Console.ReadLine();
         }
+
+        /// <summary>
+        /// Initializes source client with provided URL
+        /// <br> Opens client and calls SOAP web service to get data </br>
+        /// <br> Closes clent </br>
+        /// </summary>
+        /// <returns>Response</returns>
         private static string GetDataFromSource()
         {
             try
             {
-                /*
-                 Initializes source client with provided URL
-                 Opens client and calls SOAP web service to get data
-                 Closes clent and returns a response string
-                */
-
                 SourceWsClient client = new SourceWsClient("BasicHttpBinding_ISourceWs", SourceURL);
                 client.Open();
                 var response = client.GetActions();
@@ -59,15 +60,17 @@ namespace AvtentaChallenge
                 return null;
             }
         }
+
+        /// <summary>
+        /// Initializes destination client with provided URL
+        /// <br> Opens destination and submits transformed List to Array of data to destination </br>
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <param name="data"></param>
         private static void SubmitDataToDestination(string Email, List<Akcija> data)
         {
             try
             {
-                /*
-                 Initializes destination client with provided URL
-                 Opens destination and submits transformed List to Array of data to destination
-                */
-
                 DestinationWsClient destination = new DestinationWsClient("BasicHttpBinding_IDestinationWs", DestinationURL);
                 destination.Open();
                 var response = destination.SubmitActions(data.ToArray(), Email);
@@ -80,14 +83,16 @@ namespace AvtentaChallenge
                 ExcetionHandling(ex.Message, MethodBase.GetCurrentMethod().Name);
             }
         }
+
+        /// <summary>
+        ///  When exception occures:
+        /// <br> Excetion message is displayed </br>
+        /// <br> Program closes </br>
+        /// </summary>
+        /// <param name="ExcetionMessage"></param>
+        /// <param name="MethodName"></param>
         private static void ExcetionHandling(string ExcetionMessage, string MethodName)
         {
-            /*
-             When exception occures:
-                Excetion message is displayed
-                Program closes
-            */
-            
             Console.Clear();
             Console.WriteLine($"Error in method GetDataFromSource \n Message: {ExcetionMessage}");
             Console.WriteLine("Press any key to continue....");
